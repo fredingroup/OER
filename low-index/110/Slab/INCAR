@@ -1,0 +1,99 @@
+SYSTEM=rutile         
+
+######################### BASIC ############################
+ENCUT=400      #(df:from POTCAR)Cut-off energy for plane wave basis set(ev)
+PREC=Accurate      #(df:Medium)accurate:High.     
+ISMEAR=0      #(df:1)DOS and Eer.:-5,relax for metal:1,suitablefor all:0
+SIGMA=0.05      #(df:0.2)width of smearing(ev).try to large keeping entropy<1mev/at.
+ISTART=0       #(df:0/1 if WAVECAR exist)new:0,from WAVECAR:1.
+#VOSKOWN=1      #(df:0)only for pw91:1.
+ISPIN=2        #(df:1)non spin polarized:1,spin polarized:2.
+#MAGMOM=16*0 51*2.0 1*0.0        #(df:NIONS*1)initial magnetic moment for each atom
+#NUPDOWN=1
+#NELECT=1189
+ICHARG=2         #(df:0/2 if ISTART=0)from wave:0,CHGCAR:1,at.:2,non-SC:+10.
+NELM=100           #(df:60)maximum number of electronic SC steps
+EDIFF=1E-4         #(df:1E-4)brake condition for eletronic SC-loop
+#NELMDL=-3         #(df:-5/-12/0)number of non SC steps, + for all,-for first.
+IDIPOL=3       #(df:no)dipole correction in 1/2/3 vector direction and 4 in all dir.
+LDIPOL=T       #(df:no)switch on the potential correction mode
+#NEDOS          #(df:300)number of grid points in DOS
+#NGXF           #(df:determined by ENCUT/ENAUG)grid-points for a 2nd finer FFT-mesh
+#NGYF
+#NGZF
+#ENAUG          #(df:from POTCAR)Cut-off for augmentation charges  
+#ISYM=0           #(df:1/2)switch symmetry off(0);on (1 or 2-parallel).
+NCORE=4
+
+#####################Ionic Relaxation#######################
+IBRION=2      #(df:0/(-1 if NSW=0/1))relax method,non:-1,MD:0,CG:2.
+POTIM=0.1     #(df:0.5)controll the length of the trial step for ionic relax.
+ISIF=3       #(df:2)Control what to relax. usually:0,all:3.
+NSW=500       #(df:0)max. ion relax steps.
+EDIFFG=-1E-3  #(df:EDIFF*10)ionic rel. brake cond. loop force:(-),Ener.(+)
+NELMIN=6      #(df:2)minimum steps of electronic SC. 
+IALGO = 48
+#RWIGS=48*1.3 24*1.3
+
+#####################Write Flags############################
+#LVTOT= T      #(df:F)write the total local potential(LOCPOT)
+LCHARG=F      #(df:T)write the charge densities(CHG and CHGCAR)
+LWAVE=F      #(df:T)write the wavefunctions(WAVECAR)
+LORBIT=10     #(df:0)control whether bands are projected.usually:11
+
+######################LDA+U################################
+#LDAU=T        #(df:F)switch on or off U:T
+#LDAUU=5.5 0   #on site Cloulomb interaction parameter
+#LDAUJ=1  0     #on site Exchange interaction parameter
+#LDAUL=2  1    #-1:no term; 1:p; 2:d; 3:f 
+#LVDW=T
+#VDW_RADIUS=30
+#VDW_SCALING=0.75
+#VDW_D=20
+#VDW_C6=5.57 24.67
+#VDW_R0=1.683 1.639
+LMAXMIX=4     #set to 4(d) and 6(f) when using PAW POTCAR
+
+######Making the calculation faster for large system#######
+IALGO=38
+LREAL=A
+NSIM=4
+
+#################FINDING TRANSITION STATES######################
+#ICHAIN=0      #0:neb;1:Dynamical matrix;2:Dimer;3:Lanczos
+#IMAGES=8      #Number of images in the band, excluding endpoints
+#SPRING      #Spring force between images; negative value turns on nudging
+#LCLIMB=T      #Flag to turn on the climbing image algorithm(T or F)
+
+#######	###########Band decomposed chargedensity(STM)#######
+#LPARD=T      #(df:F)evaluate partial decomposed charge density
+#NBMOD=-3     #(df:-1)the way how to specify which bands to evaluate.
+#IBAND        #to be calculated bands specified by band numbers
+#EINT=0 1         #to be calculated bands specified by energy range
+#KPUSE        #to be evaluated k-points specified by k numbers
+#LSEPB        #(df:F)whether separately write the PARCHG for bands or not
+
+##################### spin-orbital coupling #######################
+#LSORBIT=T
+#ISYM=0
+#MAGMOM= [x,y,z] [x,y,z] ...
+#LNONCOLLINEAR=T
+#GGA_COMPAT=F
+
+################For parallelisation#######################
+LPLANE=T
+NPAR=1
+LSCALU=F
+NSIM=4
+
+########################## core level #############################
+#ICORELEVEL = 2      # 1 for Initial state, 2 for Final state core level shift
+#CLNT = 2            # type of atom from which the core electron to be excited:(set in POSCAR)
+#CLN  = 1            # The main quantum number
+#CLL  =0            # The angular quantum number
+#CLZ  = 1.00         # Number of electrons that are excited from the core
+#NELECT=577              # N(valence)+CLZ for bulk and N(valence) for molecule
+
+
+
+
