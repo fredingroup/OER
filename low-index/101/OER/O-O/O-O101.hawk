@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH -N 1
+#SBATCH -t 47:59:00
+#SBATCH --partition=hawkcpu
+#SBATCH --ntasks-per-node=52
+#SBATCH --exclusive
+
+today=$(date +%Y%m%d-%T)
+cd ${SLURM_SUBMIT_DIR}
+
+#Load and run VASOP
+module load vasp
+srun $(which vasp_std) > vasp54.${SLURM_NTASKS}.$today.log
+
+cp -p OUTCAR vasp54.OUTCAR.${SLURM_NTASKS}.$today
+
+exit
+
+
+
